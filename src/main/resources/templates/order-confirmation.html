@@ -123,15 +123,15 @@
                         <tbody>
                             <tr th:each="item : ${order.orderItems}">
                                 <td th:text="${item.product.name}">Product Name</td>
-                                <td th:text="${'₦' + item.unitPrice}">₦1000</td>
+                                <td th:text="${'R' + item.unitPrice}">R1000</td>
                                 <td th:text="${item.quantity}">1</td>
-                                <td th:text="${'₦' + item.subtotal}">₦1000</td>
+                                <td th:text="${'R' + item.subtotal}">R1000</td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="3" class="text-end fw-bold">Total:</td>
-                                <td class="fw-bold" th:text="${'₦' + order.totalPrice}">₦1000</td>
+                                <td class="fw-bold" th:text="${'R' + order.totalPrice}">R1000</td>
                             </tr>
                         </tfoot>
                     </table>
