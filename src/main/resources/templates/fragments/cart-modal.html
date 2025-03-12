@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
+</head>
+<body>
+    <div th:fragment="cart-modal">
+        <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cartModalLabel">Shopping Cart</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="cart-items-container">
+                            <!-- Empty cart message -->
+                            <div id="empty-cart-message" class="text-center py-4">
+                                <p class="lead mb-3">Your cart is empty</p>
+                                <a th:href="@{/products}" class="btn btn-outline-primary">
+                                    Continue Shopping
+                                </a>
+                            </div>
+                            
+                            <!-- Cart items table -->
+                            <div id="cart-items" class="cart-items">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50%">Product</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cart-items-body">
+                                        <!-- Template for cart item -->
+                                        <template id="cart-item-template">
+                                            <tr class="cart-item">
+                                                <td>
+                                                    <div class="cart-item-details">
+                                                        <img src="" alt="" class="cart-item-image">
+                                                        <div>
+                                                            <h6 class="item-name mb-1"></h6>
+                                                            <small class="text-muted item-size"></small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="item-price"></td>
+                                                <td>
+                                                    <input type="number" class="form-control quantity-input" min="1" value="1">
+                                                </td>
+                                                <td class="item-total"></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-danger remove-item">Remove</button>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Cart summary -->
+                            <div id="cart-summary" class="cart-summary border-top mt-3 pt-3">
+                                <div class="d-flex justify-content-between">
+                                    <span class="h5">Subtotal:</span>
+                                    <span id="cart-subtotal" class="h5">R0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
+                                Continue Shopping
+                            </button>
+                            <button type="button" class="btn btn-sm btn-danger" id="clear-cart">
+                                Clear Cart
+                            </button>
+                            <a th:href="@{/checkout}" class="btn btn-sm btn-primary" id="checkout-button" disabled>
+                                Proceed to Checkout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add this to your existing cart JavaScript or create a new file
+        function updateCartItem(product) {
+            const template = document.getElementById('cart-item-template');
+            const clone = template.content.cloneNode(true);
+            
+            clone.querySelector('.cart-item-image').src = product.imageUrl;
+            clone.querySelector('.cart-item-image').alt = product.name;
+            clone.querySelector('.item-name').textContent = product.name;
+            clone.querySelector('.item-size').textContent = product.size || '';
+            clone.querySelector('.item-price').textContent = `R${product.price.toFixed(2)}`;
+            clone.querySelector('.item-total').textContent = `R${(product.price * product.quantity).toFixed(2)}`;
+            
+            return clone;
+        }
+    </script>
+</body>
+</html>
