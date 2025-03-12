@@ -179,6 +179,9 @@
     <!-- Include Cart Modal Fragment -->
     <div th:replace="fragments/cart-modal :: cart-modal"></div>
 
+    <!-- Include Toast Container -->
+    <div th:replace="fragments/toast-notification :: toast-container"></div>
+    
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3">
         <div class="container">
@@ -216,6 +219,9 @@
     <!-- Include Cart Scripts Fragment -->
     <div th:replace="fragments/cart-scripts :: cart-scripts"></div>
     
+    <!-- Include Toast Scripts -->
+    <div th:replace="fragments/toast-notification :: toast-scripts"></div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Set current year for copyright
@@ -238,25 +244,26 @@
             const addToCartButton = document.getElementById('add-to-cart-button');
             if (addToCartButton) {
                 addToCartButton.addEventListener('click', function() {
+                    const imageElement = document.querySelector('.product-detail-image');
                     const product = {
                         id: this.getAttribute('data-id'),
                         name: this.getAttribute('data-name'),
                         price: parseFloat(this.getAttribute('data-price')),
                         quantity: parseInt(document.getElementById('quantity').value),
                         size: document.getElementById('size-select').value,
-                        imageUrl: document.querySelector('.product-detail-image').src
+                        image: imageElement.getAttribute('src') // Changed from imageUrl to image
                     };
-                    
+
                     // Validate size selection
                     if (!product.size) {
-                        alert('Please select a size');
+                        showToast('Please select a size', 'error');
                         return;
                     }
-                    
+
                     window.cartFunctions.addToCart(product);
                     
-                    // Show confirmation
-                    alert(`${product.name} (Size: ${product.size}) added to your cart!`);
+                    // Show success toast notification
+                    showToast(`${product.name} (Size: ${product.size}) added to your cart!`);
                 });
             }
         });

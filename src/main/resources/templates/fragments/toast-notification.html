@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="toast-container">
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="cartToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <i class="fas fa-shopping-cart me-2"></i>
+                    <strong class="me-auto" id="toastTitle">Cart</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toastMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <script th:fragment="toast-scripts">
+        const showToast = (message, type = 'success') => {
+            const toast = document.getElementById('cartToast');
+            const toastBody = document.getElementById('toastMessage');
+            const toastTitle = document.getElementById('toastTitle');
+            
+            // Set toast style based on type
+            toast.classList.remove('bg-success', 'bg-danger', 'text-white');
+            if (type === 'error') {
+                toast.classList.add('bg-danger', 'text-white');
+                toastTitle.textContent = 'Error';
+            } else {
+                toast.classList.add('bg-success', 'text-white');
+                toastTitle.textContent = 'Success';
+            }
+            
+            toastBody.textContent = message;
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+        };
+    </script>
+</body>
+</html>

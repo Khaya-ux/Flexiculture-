@@ -48,8 +48,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                </ul>
+                    </ul>
                 <!-- Cart Icon for desktop -->
                 <a href="#" id="cart-icon" class="btn btn-cart position-relative d-none d-lg-block">
                     <i class="fas fa-shopping-bag fa-lg"></i>
@@ -160,7 +159,8 @@
                             <button class="btn btn-sm add-to-cart-btn" 
                                     th:data-id="${product.id}" 
                                     th:data-name="${product.name}" 
-                                    th:data-price="${product.price}">
+                                    th:data-price="${product.price}"
+                                    th:data-image="${product.imageUrl}">
                                 <i class="fas fa-cart-plus"></i> Add
                             </button>
                         </div>
@@ -204,6 +204,9 @@
     <!-- Include Cart Modal Fragment -->
     <div th:replace="fragments/cart-modal :: cart-modal"></div>
 
+    <!-- Include Toast Container -->
+    <div th:replace="fragments/toast-notification :: toast-container"></div>
+    
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3">
         <div class="container">
@@ -241,6 +244,9 @@
     <!-- Include Cart Scripts Fragment -->
     <div th:replace="fragments/cart-scripts :: cart-scripts"></div>
     
+    <!-- Include Toast Scripts -->
+    <div th:replace="fragments/toast-notification :: toast-scripts"></div>
+    
     <script>
         document.getElementById("current-year").textContent = new Date().getFullYear();
         
@@ -257,13 +263,14 @@
                         id: this.getAttribute('data-id'),
                         name: this.getAttribute('data-name'),
                         price: parseFloat(this.getAttribute('data-price')),
+                        image: this.getAttribute('data-image'),
                         quantity: 1
                     };
                     
                     window.cartFunctions.addToCart(product);
                     
-                    // Show confirmation
-                    alert(`${product.name} added to your cart!`);
+                    // Show toast notification instead of alert
+                    showToast(`${product.name} added to your cart!`);
                 });
             });
         });
