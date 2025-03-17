@@ -151,36 +151,8 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h4>Flexiculture</h4>
-                    <p>Quality clothing for the modern individual.</p>
-                </div>
-                <div class="col-md-3">
-                    <h5>Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a th:href="@{/}" class="text-white">Home</a></li>
-                        <li><a th:href="@{/products}" class="text-white">Shop</a></li>
-                        <li><a href="#" class="text-white">About Us</a></li>
-                        <li><a href="#" class="text-white">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5>Contact Us</h5>
-                    <address>
-                        <p>Email: info@flexiculture.com</p>
-                        <p>Phone: +234 123 456 7890</p>
-                    </address>
-                </div>
-            </div>
-            <div class="text-center mt-3">
-                <p>&copy; <span id="current-year"></span> Flexiculture. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Replace the entire footer section -->
+    <div th:replace="fragments/footer :: footer"></div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -188,10 +160,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Clear the cart on successful order completion
             localStorage.removeItem('cart');
-            
-            // Update current year in footer
-            document.getElementById('current-year').textContent = new Date().getFullYear();
         });
     </script>
+    
+    <!-- Include footer scripts -->
+    <div th:replace="fragments/footer :: footer-scripts"></div>
 </body>
 </html>

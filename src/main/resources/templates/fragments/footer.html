@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <footer th:fragment="footer" class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Flexiculture</h4>
+                    <p>Quality clothing for the modern individual.</p>
+                    <div class="social-links mt-3">
+                        <a href="https://www.instagram.com/flexiculture_sa/" class="text-white me-3" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-instagram fa-lg"></i>
+                        </a>
+                        <a href="mailto:info@flexiculture.com" class="text-white">
+                            <i class="fas fa-envelope fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a th:href="@{/}" class="text-white">Home</a></li>
+                        <li><a th:href="@{/products}" class="text-white">Shop</a></li>
+                        <li><a href="#about" class="text-white">About Us</a></li>
+                        <li><a href="#contact" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Policies</h5>
+                    <ul class="list-unstyled">
+                        <li><a th:href="@{/policies.html#shipping}" class="text-white">Shipping & Returns</a></li>
+                        <li><a th:href="@{/policies.html#privacy}" class="text-white">Privacy Policy</a></li>
+                        <li><a th:href="@{/policies.html#terms}" class="text-white">Terms & Conditions</a></li>
+                    </ul>
+                    <address class="mt-3">
+                        <p>Email: info@flexiculture.com</p>
+                        <p>Phone: +27 123 456 7890</p>
+                    </address>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <p>&copy; <span id="current-year"></span> Flexiculture. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script th:fragment="footer-scripts">
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
